@@ -3,17 +3,27 @@
 import { Button } from "@/components/ui/button"
 import { createUsername } from "../_actions/create-username"
 import { useState } from "react"
+import Link from 'next/link'
+import { Link2Icon, LinkIcon } from 'lucide-react'
 
-export const UrlPreview = () => {
+type UrlPreviewProps = {
+  username: string | null
+}
+
+export const UrlPreview = ({ username: slug }: UrlPreviewProps) => {
   const [error, setError] = useState<null | string>(null)
+  const [username, setUsername] = useState<null | string>(slug)
 
   const userURL = `${process.env.NEXT_PUBLIC_URL_HOST}/creator/`
 
   const submitAction = async (formData: FormData) => {
+    setError(null)
+
     const username = formData.get("username") as string
 
     if (username === "") {
-      return
+      setError("O username é obrigatório")
+      return 
     }
 
     const response = await createUsername({ username })
@@ -22,6 +32,27 @@ export const UrlPreview = () => {
       setError(response.error)
       return
     }
+
+    if (response.data) {
+      setUsername(response.data)
+    }
+  }
+
+  if (!!username) {
+    return (
+      <div className="flex items-center justify-between w-full flex-1 gap-4 p-2 text-gray-100">
+        <div className="flex flex-col items-start w-full text-sm gap-2 md:flex-row md:items-center">
+          <h3 className="font-bold text-lg">Sua URL: </h3>
+          <Link href={userURL + username} target="_blank">
+            {userURL + username}
+          </Link>
+        </div>
+
+        <Link href={userURL + username} target="_blank" className="hidden bg-blue-500 px-4 py-1 rounded-md md:block">
+          <Link2Icon size={20} />
+        </Link>
+      </div>
+    )
   }
   
   return (
@@ -30,7 +61,7 @@ export const UrlPreview = () => {
         action={submitAction}
         className="flex flex-1 flex-col gap-4 items-start md:items-center md:flex-row"
       >
-        <div className="flex items-center justify-center w-full">
+        <div className="flex items-center justify-center w-full text-sm">
           <p className="max-w-[180px] truncate md:max-w-full" title={userURL}>
             {userURL}
           </p>
@@ -46,7 +77,7 @@ export const UrlPreview = () => {
           Salvar
         </Button>
       </form>
-      <p className="text-sm text-destructive">* {error && error}</p>
+      <p className="text-sm text-destructive">{error && error}</p>
     </div>
   )
 }
