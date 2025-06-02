@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Apoia.dev
 
-## Getting Started
+Bem-vindo ao **Apoia.dev** — a plataforma moderna para criadores de conteúdo receberem apoio financeiro de forma simples, rápida e estilosa.
 
-First, run the development server:
+![Logo Apoia.dev](public/logo.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Sobre
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O **Apoia.dev** conecta criadores e apoiadores, facilitando doações e interações em uma experiência personalizada e sem burocracia.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Página exclusiva para cada criador
+- Recebimento de doações em poucos cliques
+- Mensagens personalizadas dos apoiadores
+- Dashboard intuitivo para gestão de doações
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tecnologias
 
-## Learn More
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- Prisma ORM
+- PostgreSQL
+- NextAuth.js
+- Sonner (notificações)
+- Radix UI
 
-To learn more about Next.js, take a look at the following resources:
+## 🚦 Como rodar localmente
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone o repositório**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```sh
+   git clone https://github.com/seu-usuario/apoia-dev.git
+   cd apoia-dev
+   ```
 
-## Deploy on Vercel
+2. **Instale as dependências**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```sh
+   npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Configure o ambiente**
+
+   - Copie `.env.example` para `.env` e preencha as variáveis.
+
+4. **Rode as migrations**
+
+   ```sh
+   npx prisma migrate dev
+   ```
+
+5. **Inicie o projeto**
+   ```sh
+   npm run dev
+   ```
+
+Acesse em [http://localhost:3000](http://localhost:3000)
+
+## 🧑‍💻 Contribua
+
+Contribuições são bem-vindas! Abra uma issue ou envie um PR.
+
+## 📄 Licença
+
+MIT
+
+---
+
+Feito com muito ☕ por [Seu Nome](https://github.com/eduardobertozi)
