@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button'
 import { createUsername } from '../_actions/create-username'
 import { useState } from 'react'
 import Link from 'next/link'
-import { Link2Icon, LinkIcon } from 'lucide-react'
-import { env } from '@/lib/env'
+import { Link2Icon } from 'lucide-react'
+import { env } from '@/env/public-env'
 
 type UrlPreviewProps = {
   username: string | null

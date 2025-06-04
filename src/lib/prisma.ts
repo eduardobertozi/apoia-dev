@@ -1,5 +1,5 @@
 import { PrismaClient } from '@/generated/prisma/client' // Foi ajustado para o caminho correto do Prisma Client atualizado
-import { env } from './env'
+import { env } from '../env/env'
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
 
