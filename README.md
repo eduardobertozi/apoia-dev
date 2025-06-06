@@ -66,4 +66,10 @@ MIT
 
 ---
 
-Feito com muito ☕ por [Seu Nome](https://github.com/eduardobertozi)
+Feito com muito ☕ por [Eduardo Bertozi](https://github.com/eduardobertozi)
+
+## 🤝 Agradecimentos
+
+Obrigado ao @sujeito-programador [Sujeito Programador](https://github.com/sujeito-programador) que produziu o conteúdo em seu canal do yotube,
+4 ótimos vídeos ensinando com didática sensacional. Este micro Saas demonstra
+todo o poder e agilidade do NextJs.
