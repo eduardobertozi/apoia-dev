@@ -8,7 +8,7 @@ import {
   TableRow
 } from '@/components/ui/table'
 import { Donation } from '@/generated/prisma'
-import { formatCurrency } from '@/utils/format-currency'
+import { formatCurrency, formatDate } from '@/utils/format'
 import { Fragment } from 'react'
 
 type DonationProp = Pick<
@@ -55,7 +55,7 @@ export async function DonationTable({ donations }: DonationTableProps) {
                   {formatCurrency(donation.amount / 100)}
                 </TableCell>
                 <TableCell className="text-center">
-                  {donation.createdAt.toDateString()}
+                  {formatDate(donation.createdAt)}
                 </TableCell>
               </TableRow>
             ))}
@@ -79,7 +79,7 @@ export async function DonationTable({ donations }: DonationTableProps) {
                   {formatCurrency(donation.amount / 100)}
                 </span>
                 <span className="text-sm text-muted-foreground">
-                  {donation.createdAt.toDateString()}
+                  {formatDate(donation.createdAt)}
                 </span>
               </div>
             </CardContent>
