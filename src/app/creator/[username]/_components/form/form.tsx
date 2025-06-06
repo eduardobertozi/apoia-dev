@@ -90,8 +90,12 @@ export const FormDonate = ({ slug, creatorId }: FormDonateProps) => {
           )}
         />
 
-        <Button type="submit" className="w-full">
-          Apoiar
+        <Button
+          disabled={form.formState.isSubmitting}
+          type="submit"
+          className="w-full"
+        >
+          {form.formState.isSubmitting ? 'Carregando...' : 'Fazer doação'}
         </Button>
       </form>
     </Form>

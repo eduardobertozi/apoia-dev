@@ -27,8 +27,6 @@ export const POST = auth(async function POST(request) {
       }
     })
 
-    console.log(account, 'RESPOSTA DA CONTA')
-
     if (!account.id) {
       return NextResponse.json(
         { error: 'Falha ao criar conta de pagamento' },
