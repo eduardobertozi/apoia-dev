@@ -27,21 +27,33 @@ export const useFormUsername = ({ slug, creatorId }: FormDonateProps) => {
       slug
     })
 
+    await handlePaymentResponse(checkout)
+  }
+
+  const handlePaymentResponse = async (checkout: {
+    sessionId?: string
+    error?: string
+  }) => {
     if (checkout.error) {
       toast.error(checkout.error)
       return
     }
 
-    if (checkout.data) {
-      const data = JSON.parse(checkout.data)
-      const stripe = await getStripeJs()
-
-      await stripe?.redirectToCheckout({
-        sessionId: data.id
-      })
-
-      window.location.href = data.url
+    if (!checkout.sessionId) {
+      toast.error('Falha ao criar pagamento. Tente novamente mais tarde')
+      return
     }
+
+    const stripe = await getStripeJs()
+
+    if (!stripe) {
+      toast.error('Falha ao criar pagamento. Tente novamente mais tarde')
+      return
+    }
+
+    await stripe?.redirectToCheckout({
+      sessionId: checkout.sessionId
+    })
   }
 
   return {
