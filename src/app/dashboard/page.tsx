@@ -4,6 +4,8 @@ import { Stats } from './_components/analytics'
 import { CreateAccountButton } from './_components/create-account-button'
 import { DonationTable } from './_components/donates'
 import { getLoginOnboardAccount } from './_data_access/get-onboard-account'
+import { Fragment } from 'react'
+import { getAllDonates } from './_data_access/get_donates'
 
 export default async function Dashboard() {
   const session = await auth()
@@ -16,7 +18,7 @@ export default async function Dashboard() {
     accountId: session.user.connectedStripeAccountId
   })
 
-  console.log(accountUrl)
+  const donations = await getAllDonates()
 
   return (
     <div className="p-4">
@@ -40,7 +42,11 @@ export default async function Dashboard() {
       <Stats />
 
       <h2 className="text-2xl font-semibold mb-2">Últimas doações</h2>
-      <DonationTable />
+      {session.user.connectedStripeAccountId && (
+        <Fragment>
+          <DonationTable donations={donations.data ?? []} />
+        </Fragment>
+      )}
     </div>
   )
 }
