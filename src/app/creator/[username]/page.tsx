@@ -3,6 +3,8 @@ import { getInfoUser } from './_data-access/get-info-user'
 import { notFound } from 'next/navigation'
 import { fakeAvatar } from '@/constants/fake-avatar'
 import { FormDonate } from './_components/form/form'
+import { CoverSection } from './_components/cover-section'
+import { AboutSection } from './_components/about-section'
 
 export default async function Apoia({
   params
@@ -18,52 +20,26 @@ export default async function Apoia({
   }
 
   return (
-    <div className=" min-h-[calc(100vh-64px)]">
-      <div className="w-full h-64 relative bg-black">
-        <Image
-          src={user.image ?? fakeAvatar}
-          alt="Banner"
-          fill
-          className="object-cover opacity-50"
-          priority
-          quality={100}
-        />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+      <CoverSection
+        coverImage={user?.image ?? ''}
+        profileImage={user?.image ?? ''}
+        name={user?.name ?? 'Sem Nome'}
+      />
+      <main className="container mx-auto max-w-6xl p-4 sm:p-6">
+        <div className="relative grid grid-cols-1 gap-6 -mt-8 z-10 lg:grid-cols-2 lg:gap-8 md:-mt-12">
+          <div>
+            <AboutSection name={user?.name ?? ''} bio={user?.bio ?? ''} />
+          </div>
 
-      <section className="flex flex-col w-full items-center justify-center mx-auto max-w-7xl p-4 relative">
-        <div className="flex flex-col items-center">
-          <Image
-            src={user.image ?? fakeAvatar}
-            className="w-36 h-36 rounded-xl bg-gray-50 hover:shadow-lg duration-300 select-none text-zinc-900 text-3xl flex items-center justify-center object-cover absolute -top-16 border-4 border-white"
-            alt="Matheus Fraga"
-            width={96}
-            height={96}
-            quality={100}
-          />
-          <h1 className="font-bold text-xl md:text-2xl mt-20 mb-4">
-            {user.name ?? 'Nome do usuário'}
-          </h1>
+          <div>
+            <FormDonate
+              slug={user.username!}
+              creatorId={user.connectedStripeAccountId ?? ''}
+            />
+          </div>
         </div>
-      </section>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 w-full mx-auto gap-4 max-w-5xl">
-        <section className="flex flex-col bg-gray-50 p-5 rounded-md h-fit mx-2">
-          <p className="font-semibold text-lg">
-            Sobre {user.name ?? 'Nome do usuário'}
-          </p>
-          <p className="text-gray-500 mt-2">{user.bio ?? 'Sem biografia.'}</p>
-        </section>
-
-        <section className="bg-gray-50 rounded-md p-5 h-fit mx-2">
-          <h3 className="font-semibold text-lg">
-            {user.name ? `Apoiar ${user.name}` : 'Apoiar criador'}
-          </h3>
-          <FormDonate
-            slug={user.username!}
-            creatorId={user.connectedStripeAccountId ?? ''}
-          />
-        </section>
-      </div>
+      </main>
     </div>
   )
 }
