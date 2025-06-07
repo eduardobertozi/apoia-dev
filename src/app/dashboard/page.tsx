@@ -6,6 +6,7 @@ import { DonationTable } from './_components/donates'
 import { getLoginOnboardAccount } from './_data_access/get-onboard-account'
 import { Fragment } from 'react'
 import { getAllDonates } from './_data_access/get_donates'
+import { getStripeDashboardUrl } from './_data_access/get-stripe-dashboard'
 
 export default async function Dashboard() {
   const session = await auth()
@@ -14,10 +15,7 @@ export default async function Dashboard() {
     return redirect('/')
   }
 
-  const accountUrl = await getLoginOnboardAccount({
-    accountId: session.user.connectedStripeAccountId
-  })
-
+  const urlStripeDashboard = await getStripeDashboardUrl()
   const donations = await getAllDonates()
 
   return (
@@ -26,9 +24,9 @@ export default async function Dashboard() {
         <div className="w-full flex items-center gap-2 justify-between">
           <h1 className="text-2xl font-semibold">Minha conta</h1>
 
-          {accountUrl && (
+          {urlStripeDashboard && (
             <a
-              href={accountUrl}
+              href={urlStripeDashboard}
               className="bg-zinc-900 px-4 py-1 rounded-md text-white cursor-pointer"
             >
               Ajustar Conta
