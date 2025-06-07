@@ -1,13 +1,17 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import Link from "next/link"
-import { Menu, LogOut } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { DialogTitle } from "@/components/ui/dialog"
+import { useState } from 'react'
+import Link from 'next/link'
+import { Menu, LogOut } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { DialogTitle } from '@/components/ui/dialog'
 
-export function MobileMenu() {
+type MobileMenuProps = {
+  handleSignOut: () => Promise<void>
+}
+
+export function MobileMenu({ handleSignOut }: MobileMenuProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -19,9 +23,7 @@ export function MobileMenu() {
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-[240px] sm:w-[300px] p-5">
-        <DialogTitle>
-          Menu
-        </DialogTitle>
+        <DialogTitle>Menu</DialogTitle>
 
         <div className="flex flex-col gap-6 py-6">
           <Link
@@ -42,6 +44,7 @@ export function MobileMenu() {
           <Button
             variant="ghost"
             className="justify-start px-0 text-red-500 hover:text-red-600 hover:bg-transparent cursor-pointer"
+            onClick={handleSignOut}
           >
             <LogOut className="mr-2 h-4 w-4" />
             Sair

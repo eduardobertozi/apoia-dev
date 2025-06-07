@@ -39,11 +39,10 @@ export default async function Dashboard() {
 
       {!session.user.connectedStripeAccountId && <CreateAccountButton />}
 
-      <Stats />
-
-      <h2 className="text-2xl font-semibold mb-2">Últimas doações</h2>
       {session.user.connectedStripeAccountId && (
         <Fragment>
+          <h2 className="text-2xl font-semibold mb-2">Últimas doações</h2>
+          <Stats />
           <DonationTable donations={donations.data ?? []} />
         </Fragment>
       )}
