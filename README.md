@@ -21,6 +21,8 @@ O **Apoia.dev** conecta criadores e apoiadores, facilitando doações e interaç
 - Prisma ORM
 - PostgreSQL
 - NextAuth.js
+- Stripe
+- Tanstack Query
 - Sonner (notificações)
 - Radix UI
 
