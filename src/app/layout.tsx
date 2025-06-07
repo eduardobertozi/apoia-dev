@@ -3,6 +3,7 @@ import { Roboto } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'sonner'
 import { SessionProvider } from 'next-auth/react'
+import { QueryClientProvider } from '@/providers/query-client'
 
 const roboto = Roboto({
   subsets: ['latin']
@@ -22,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.className} antialiased`}>
         <SessionProvider>
-          {children}
+          <QueryClientProvider>{children}</QueryClientProvider>
           <Toaster richColors duration={3000} />
         </SessionProvider>
       </body>

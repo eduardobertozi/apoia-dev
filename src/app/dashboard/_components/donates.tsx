@@ -1,3 +1,5 @@
+'use client'
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Table,
@@ -9,18 +11,30 @@ import {
 } from '@/components/ui/table'
 import { Donation } from '@/generated/prisma'
 import { formatCurrency, formatDate } from '@/utils/format'
+import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
+import { getAllDonates } from '../_data_access/get_donates'
+import { TableSkeleton } from '@/components/skeletons/table-skeleton'
 
 type DonationProp = Pick<
   Donation,
   'id' | 'amount' | 'donorName' | 'donorMessage' | 'createdAt'
 >
 
-type DonationTableProps = {
-  donations: DonationProp[]
-}
+export function DonationTable() {
+  const { data, isLoading } = useQuery<DonationProp[]>({
+    queryKey: ['get-donates'],
+    queryFn: async () => {
+      const donations = await getAllDonates()
+      return donations.data || []
+    },
+    refetchInterval: 30000
+  })
 
-export async function DonationTable({ donations }: DonationTableProps) {
+  if (isLoading) {
+    return <TableSkeleton />
+  }
+
   return (
     <Fragment>
       {/* Versão para desktop */}
@@ -43,7 +57,7 @@ export async function DonationTable({ donations }: DonationTableProps) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {donations.map((donation) => (
+            {data?.map((donation) => (
               <TableRow key={donation.id}>
                 <TableCell className="font-medium">
                   {donation.donorName}
@@ -65,7 +79,7 @@ export async function DonationTable({ donations }: DonationTableProps) {
 
       {/* Versão para mobile */}
       <div className="lg:hidden space-y-4">
-        {donations.map((donation) => (
+        {data?.map((donation) => (
           <Card key={donation.id}>
             <CardHeader>
               <CardTitle className="text-lg">{donation.donorName}</CardTitle>

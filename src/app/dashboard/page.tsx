@@ -1,11 +1,9 @@
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
+import { Fragment } from 'react'
 import { Stats } from './_components/analytics'
 import { CreateAccountButton } from './_components/create-account-button'
 import { DonationTable } from './_components/donates'
-import { getLoginOnboardAccount } from './_data_access/get-onboard-account'
-import { Fragment } from 'react'
-import { getAllDonates } from './_data_access/get_donates'
 import { getStripeDashboardUrl } from './_data_access/get-stripe-dashboard'
 
 export default async function Dashboard() {
@@ -16,7 +14,6 @@ export default async function Dashboard() {
   }
 
   const urlStripeDashboard = await getStripeDashboardUrl()
-  const donations = await getAllDonates()
 
   return (
     <div className="p-4">
@@ -41,7 +38,7 @@ export default async function Dashboard() {
         <Fragment>
           <h2 className="text-2xl font-semibold mb-2">Últimas doações</h2>
           <Stats />
-          <DonationTable donations={donations.data ?? []} />
+          <DonationTable />
         </Fragment>
       )}
     </div>
