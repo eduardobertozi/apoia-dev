@@ -70,6 +70,6 @@ Feito com muito ☕ por [Eduardo Bertozi](https://github.com/eduardobertozi)
 
 ## 🤝 Agradecimentos
 
-Obrigado ao @sujeito-programador [Sujeito Programador](https://github.com/sujeito-programador) que produziu o conteúdo em seu canal do yotube,
+Obrigado ao @devfraga [Sujeito Programador](https://github.com/devfraga) que produziu o conteúdo em seu canal do yotube,
 4 ótimos vídeos ensinando com didática sensacional. Este micro Saas demonstra
 todo o poder e agilidade do NextJs.
